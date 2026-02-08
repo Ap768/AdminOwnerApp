@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Property</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/owner/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>Edit Property</h2>
+
+    <form class="form-grid" th:action="@{/owner/update}" method="post">
+
+       
+        <input type="hidden" name="id" th:value="${property.id}" />
+
+        <input type="text"
+               name="name"
+               placeholder="Property Name"
+               th:value="${property.name}"
+               required />
+
+        <input type="text"
+               name="location"
+               placeholder="Location"
+               th:value="${property.location}"
+               required />
+
+        <input type="number"
+               name="price"
+               placeholder="Price"
+               th:value="${property.price}"
+               required />
+
+        <button type="submit">Update Property</button>
+    </form>
+</div>
+
+</body>
+</html>

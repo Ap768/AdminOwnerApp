@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/create-owner">Create Owner</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+  <h2>Admin Dashboard</h2>
+
+  <h3>All Owners</h3>
+  <div class="table-wrapper">
+      <table class="owners-table">
+          <thead>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Action</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr th:each="o : ${owners}">
+              <td th:text="${o.id}"></td>
+              <td th:text="${o.name}"></td>
+              <td th:text="${o.email}"></td>
+              <td th:text="${o.enabled ? 'Enabled' : 'Disabled'}"></td>
+              <td>
+                  <a th:if="${!o.enabled}" th:href="@{/admin/enable/{id}(id=${o.id})}">Enable</a>
+                  <a th:if="${o.enabled}" th:href="@{/admin/disable/{id}(id=${o.id})}">Disable</a>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <h3>Create Owner</h3>
+  <form class="form-grid" th:action="@{/admin/create-owner}" method="post">
+    <input type="text" name="name" placeholder="Owner Name" required />
+    <input type="email" name="email" placeholder="Owner Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Create Owner</button>
+  </form>
+</div>
+
+
+</body>
+</html>
